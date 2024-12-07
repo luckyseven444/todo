@@ -35,6 +35,6 @@ Route::post('/login', function (Request $request) {
 
 // Group routes with common 'auth:sanctum' middleware
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/todos/status', [TodoController::class, 'status']);
+    Route::post('/todos/status/{todo}', [TodoController::class, 'status']);
     Route::apiResource('todos', TodoController::class);
 });

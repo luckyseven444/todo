@@ -140,7 +140,7 @@ class TodoController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'todocreated successfully',
-                 
+
             ], 201);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -164,8 +164,34 @@ class TodoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function status()
+    public function status(Todo $todo)
     {
-        return response('success', 200, []);
+        try {
+            //$todo= Todo($request->validated());
+            $todo->status = !$todo->status;
+            $todo->save();
+            // Return a success response
+            return response()->json([
+                'success' => true,
+                'message' => 'todocreated successfully',
+                'data' => $todo, // Return the created todo object
+            ], 201);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Handle validation errors
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $e->errors(), // Include validation error messages
+            ], 422);
+
+        } catch (\Exception $e) {
+            // Handle general errors
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong',
+                'error' => $e->getMessage(), // For debugging; remove in production
+            ], 500);
+        }
     }
 }
