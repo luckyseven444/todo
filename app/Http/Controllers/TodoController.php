@@ -14,7 +14,26 @@ class TodoController extends Controller
      */
     public function index()
     {
-        //
+        try {
+
+            $todos = Todo::all();
+            // Return a success response
+            return response()->json([
+                'success' => true,
+                'message' => 'get todos list successfully',
+                'data' => $todos,
+            ], 201);
+
+        }
+
+        catch (\Exception $e) {
+            // Handle general errors
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong',
+                'error' => $e->getMessage(), // For debugging; remove in production
+            ], 500);
+        }
     }
 
     /**
