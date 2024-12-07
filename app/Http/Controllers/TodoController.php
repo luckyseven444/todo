@@ -98,7 +98,34 @@ class TodoController extends Controller
      */
     public function update(UpdateTodoRequest $request, Todo $todo)
     {
-        //
+      
+        try {
+            //$todo= Todo($request->validated());
+            $todo->title = $request->title;
+            $todo->save();
+            // Return a success response
+            return response()->json([
+                'success' => true,
+                'message' => 'todocreated successfully',
+                'data' => $todo, // Return the created todoobject
+            ], 201);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Handle validation errors
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $e->errors(), // Include validation error messages
+            ], 422);
+
+        } catch (\Exception $e) {
+            // Handle general errors
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong',
+                'error' => $e->getMessage(), // For debugging; remove in production
+            ], 500);
+        }
     }
 
     /**
