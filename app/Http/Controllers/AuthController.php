@@ -22,12 +22,8 @@ class AuthController extends Controller
             throw ValidationException::withMessages([
                 'message' => 'The provided credentials are incorrect.',
             ]);
-            // return response()->json([
-            //     'message' => 'The provided credentials are incorrect.',
-            // ]);
         }
 
-        // return $user->createToken($request->device_name)->plainTextToken;
         return response()->json([
             'token' => $user->createToken($request->device_name)->plainTextToken,
         ]);

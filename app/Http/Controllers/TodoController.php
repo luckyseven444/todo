@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTodoRequest;
 use App\Http\Requests\UpdateTodoRequest;
 use App\Models\Todo;
-use GuzzleHttp\Psr7\Request;
 
 class TodoController extends Controller
 {
@@ -23,10 +22,7 @@ class TodoController extends Controller
                 'message' => 'get todos list successfully',
                 'data' => $todos,
             ], 201);
-
-        }
-
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             // Handle general errors
             return response()->json([
                 'success' => false,
@@ -36,13 +32,6 @@ class TodoController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -58,7 +47,6 @@ class TodoController extends Controller
                 'message' => 'todocreated successfully',
                 'data' => $todo, // Return the created todoobject
             ], 201);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Handle validation errors
             return response()->json([
@@ -66,7 +54,6 @@ class TodoController extends Controller
                 'message' => 'Validation error',
                 'errors' => $e->errors(), // Include validation error messages
             ], 422);
-
         } catch (\Exception $e) {
             // Handle general errors
             return response()->json([
@@ -77,21 +64,6 @@ class TodoController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Todo $todo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Todo $todo)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -109,7 +81,6 @@ class TodoController extends Controller
                 'message' => 'todocreated successfully',
                 'data' => $todo, // Return the created todoobject
             ], 201);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Handle validation errors
             return response()->json([
@@ -117,7 +88,6 @@ class TodoController extends Controller
                 'message' => 'Validation error',
                 'errors' => $e->errors(), // Include validation error messages
             ], 422);
-
         } catch (\Exception $e) {
             // Handle general errors
             return response()->json([
@@ -142,7 +112,6 @@ class TodoController extends Controller
                 'message' => 'todocreated successfully',
 
             ], 201);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Handle validation errors
             return response()->json([
@@ -150,7 +119,6 @@ class TodoController extends Controller
                 'message' => 'Validation error',
                 'errors' => $e->errors(), // Include validation error messages
             ], 422);
-
         } catch (\Exception $e) {
             // Handle general errors
             return response()->json([
@@ -176,7 +144,6 @@ class TodoController extends Controller
                 'message' => 'todocreated successfully',
                 'data' => $todo, // Return the created todo object
             ], 201);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Handle validation errors
             return response()->json([
@@ -184,7 +151,6 @@ class TodoController extends Controller
                 'message' => 'Validation error',
                 'errors' => $e->errors(), // Include validation error messages
             ], 422);
-
         } catch (\Exception $e) {
             // Handle general errors
             return response()->json([
